@@ -17,10 +17,10 @@ pipeline {
             }
             stage('Push docker image to hub') {
                 steps {
-                    withCredentials([string(credentialsId: 'dockerpwd', variable: 'dockerhub-pwd')]) {
-                    bat 'docker login -u anandbabu18 -p ${dockerhub-pwd}'
-                    }
+                    withDockerRegistry([ credentialsId: "docker-hub-user", url: "https://registry.hub.docker.com" ]) {
                     bat 'docker push anandbabu18/docker-devops-integration'
+ 
+                    }
                 }
             }
 
